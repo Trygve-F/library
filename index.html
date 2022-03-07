@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="Add Book">
+        <form id = "addBook" action="">
+        <label for="addBook">Add a book to your library</label>
+        <input type="text" name="author" id="author" class="forminput" minlength="0" max="50" value ="asd" required>
+            <label for="author">Author:</label>
+        <input type="text" name="title" id="title" class="forminput" minlength="0" max="50" value = "ad" required>
+            <label for="title">Title:</label>
+        <input type="tel" name="pages" id="pages" class="forminput" min="0" max ="5000" value = "2">
+            <label for="pages">Number of pages:</label>
+        <input type="text" name="genre" id="genre" class="forminput" minlength ="0" max =" 50" value = "sci-fi">
+            <label for="genre">Genre:</label>
+            <datalist>Fiction, Non Fiction, </datalist>
+        <input type="radio" name="status" value="Finished" class="radio">
+            <label for="read">Finished</label>
+        <input type="radio" name="status" value="In Progress" class="radio">
+            <label for="read">In Progress</label>
+        <input type="radio" name="status" value="Not Started" class="notStarted" required checked>
+            <label for="unread">Not Started</label>
+    </fieldset>
+    
+    <input type="button" id="submit" value="Submit">
+    </form>
+
+    <div id = 'grid'>
+
+    </div>
+</body>
+<script src ="./script.js"></script>
+</html>
