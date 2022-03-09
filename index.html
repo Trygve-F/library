@@ -5,34 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <input type="button" value="Add Book">
-        <form id = "addBook" action="">
-        <label for="addBook">Add a book to your library</label>
-        <input type="text" name="author" id="author" class="forminput" minlength="0" max="50" value ="asd" required>
+    <input type="image" src = "./images/plus.png" id = "openForm" value="Add Book">
+    <div class="form-popup" id = "popupForm">
+        <form id = "form" action="">
+            <label for="addBook">Add a book to your library</label>
             <label for="author">Author:</label>
-        <input type="text" name="title" id="title" class="forminput" minlength="0" max="50" value = "ad" required>
+                <input type="text" name="author" id="author" class="forminput" minlength="0" max="50"  required>
             <label for="title">Title:</label>
-        <input type="tel" name="pages" id="pages" class="forminput" min="0" max ="5000" value = "2">
-            <label for="pages">Number of pages:</label>
-        <input type="text" name="genre" id="genre" class="forminput" minlength ="0" max =" 50" value = "sci-fi">
-            <label for="genre">Genre:</label>
-            <datalist>Fiction, Non Fiction, </datalist>
-        <input type="radio" name="status" value="Finished" class="radio">
+                <input type="text" name="title" id="title" class="forminput" minlength="0" max="50"  required>
+                <label for="genre">Genre:</label>
+            <input type="text" name="genre" id="genre" class="forminput" minlength ="0" max =" 50" >
+                <datalist>Fiction, Non Fiction, </datalist>
             <label for="read">Finished</label>
-        <input type="radio" name="status" value="In Progress" class="radio">
+                <input type="radio" name="progress" value="finished" class="radio">
             <label for="read">In Progress</label>
-        <input type="radio" name="status" value="Not Started" class="notStarted" required checked>
+                <input type="radio" name="progress" value="inProgress" class="radio">
             <label for="unread">Not Started</label>
-    </fieldset>
-    
-    <input type="button" id="submit" value="Submit">
-    </form>
-
-    <div id = 'grid'>
-
+                <input type="radio" name="progress" value="notStarted" class="radio" required checked>
+            <input type="button" id="submit" value="Submit">
+            <input type="image" src = "./images/close.png" id="exit" value="exit">
+        </form>
     </div>
+
+    <div id ='grid'></div>
 </body>
 <script src ="./script.js"></script>
 </html>

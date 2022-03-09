@@ -1,83 +1,112 @@
-let myLibrary = []
-document.getElementById('submit').addEventListener('click', addBookToLibrary)
-document.getElementById('newBook').addEventListener('click', addBookForm)
+let Library = [];
 
 
-function Book(title, author, pages, genre, status) {
-    this.title = title
-    this.author = author
-    this.pages = pages
-    this.genre = genre
-    this.status = status
+document.getElementById('openForm').addEventListener('click', openForm);
+document.getElementById('exit').addEventListener('click', closeForm);
+document.getElementById('submit').addEventListener('click', (e) => {
+addBookToLibrary()
+clearForm()
+render()
+});
+
+
+
+function Book(title, author, genre, progress) {
+    this.title = title;
+    this.author = author;
+    this.genre = genre;
+    this.progress = progress
+    
 }
         
 function addBookToLibrary() {
-    let title = document.getElementById('title').value;
-    let author = document.getElementById('author').value;
-    let pages = document.getElementById('pages').value;
-    let genre = document.getElementById('genre').value;
-    let status = document.querySelector('input[name=status]:checked').value;
-    let newBook = new Book(title, author, pages, genre, status);
-    myLibrary.push(newBook);
-    updateLibrary();
-    //updateLibrary();
+    let title = 'Title: ' + document.getElementById('title').value;
+    let author = 'Author: ' + document.getElementById('author').value;
+    let genre = 'Genre: ' + document.getElementById('genre').value;
+    let progress = document.querySelector('input[name=progress]:checked').value;
+    let newBook = new Book(title, author, genre, progress);
+    Library.push(newBook);
+    
 }
 
-/*function updateLibrary() { 
-    clearCards();
-    for (let i=0; i < myLibrary.length; i++) {
+function render() {
     const grid = document.getElementById('grid');
-    const card = document.createElement('card');
-    grid.appendChild(card);
 
-    const newTitle = document.createElement('div');
-    newTitle.textContent = myLibrary[i].title
-    card.appendChild(newTitle);
+    let i = 0;
+    grid.innerHTML = "";
+    Library.forEach((book) => {
+        const card = document.createElement('card');
+        card.id = i++;
+        grid.appendChild(card);
 
-    const newAuthor = document.createElement('div');
-    newAuthor.textContent = myLibrary[i].author
-    card.appendChild(newAuthor);
+        const remove = document.createElement('input');
+            remove.type = 'image';
+            remove.id = 'removeButton'
+            remove.value = 'Remove'
+            remove.src = "./images/close.png"
+            remove.onclick = removeBook;
+            card.appendChild(remove)
 
-    const newPages = document.createElement('div');
-    newPages.textContent = myLibrary[i].pages
-    card.appendChild(newPages);
-
-    const newGenre = document.createElement('div');
-    newGenre.textContent = myLibrary[i].genre
-    card.appendChild(newGenre);
-    }
-}
-*/
-
-function updateLibrary() {
-    clearCards();
-    myLibrary.forEach((book, index) => {
-        let card = document.createElement('card');
-        let grid = document.getElementById('grid')
-        grid.appendChild(card)
-    Object.keys(book).forEach(prop => {
-        let div = document.createElement('div');
-        div.textContent = book[prop];
-        card.appendChild(div)
+        Object.keys(book).forEach((prop) => {
+        if (prop != 'progress') {
+        const div = document.createElement('div');
+            div.textContent = book[prop];
+            card.appendChild(div);
+        } else {
+        const progressbutton = document.createElement('input');
+            progressbutton.type = 'button';
+            progressbutton.id = 'progressButton'
+            progressbutton.value = book[prop]
+            progressbutton.className = book[prop];
+            progressbutton.onclick = changeProgress;
+            card.appendChild(progressbutton)
+        }
         })
-    });
+    })
 }
 
-function clearCards() {
-    const grid = document.getElementById("grid");
-  while (grid.firstChild) {
-    grid.removeChild(grid.lastChild);
+function removeBook() {
+    let id = this.parentElement.id
+    Library.splice(id, 1)
+    this.parentElement.remove();
+    render();
+    };
+
+function changeProgress() {
+    progressbutton = this;
+    switch (true) {
+    case progressbutton.className == "notStarted":
+        progressbutton.className = "inProgress";
+        progressbutton.value = "In Progress"
+        break;
+
+    case progressbutton.className == "inProgress":
+        progressbutton.className = "finished";
+        progressbutton.value = "Finished"
+        break;
+
+    case progressbutton.className == "finished":
+        progressbutton.className = "notStarted";
+        progressbutton.value = "Not Started"
     }
 }
 
-function addBookForm() {
-    document.getElementById('addBook').style.display = "block";
-}
 
-function closeBookForm() {
-    document.getElementById('addBook').style.display = "none"
-}
+function openForm() {
+    document.getElementById('popupForm').style.display = "block";
+};
 
+function closeForm() {
+    document.getElementById('popupForm').style.display = "none"
+};
+
+function clearForm() {
+    title.value = "";
+    author.value = "";
+    genre.value = "";
+};
+
+render();
 
 
 
