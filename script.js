@@ -1,5 +1,13 @@
 let Library = [];
 
+class Book {     
+constructor(title, author, genre, progress) {
+    this.title = title;
+    this.author = author;
+    this.genre = genre;
+    this.progress = progress
+}};
+
 
 document.getElementById('openForm').addEventListener('click', openForm);
 document.getElementById('exit').addEventListener('click', closeForm);
@@ -11,14 +19,6 @@ render()
 
 
 
-function Book(title, author, genre, progress) {
-    this.title = title;
-    this.author = author;
-    this.genre = genre;
-    this.progress = progress
-    
-}
-        
 function addBookToLibrary() {
     let title = 'Title: ' + document.getElementById('title').value;
     let author = 'Author: ' + document.getElementById('author').value;
@@ -26,7 +26,6 @@ function addBookToLibrary() {
     let progress = document.querySelector('input[name=progress]:checked').value;
     let newBook = new Book(title, author, genre, progress);
     Library.push(newBook);
-    
 }
 
 function render() {
@@ -36,8 +35,9 @@ function render() {
     grid.innerHTML = "";
     Library.forEach((book) => {
         const card = document.createElement('card');
-        card.id = i++;
+        card.id = i;
         grid.appendChild(card);
+        i++;
 
         const remove = document.createElement('input');
             remove.type = 'image';
@@ -107,6 +107,4 @@ function clearForm() {
 };
 
 render();
-
-
 
